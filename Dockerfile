@@ -6,8 +6,8 @@ WORKDIR /src
 
 COPY ./analytics/requirements.txt requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 COPY ./analytics .
 
-CMD service postgresql start && python app.py
+CMD python app.py
