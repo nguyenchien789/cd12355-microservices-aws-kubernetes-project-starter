@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-api
+  name: my-api
   labels:
-    app: admin-api
+    app: my-api
 spec:
+  type: ClusterIP
   selector:
-    app.kubernetes.io/name: admin-api
+    service: my-api
   ports:
   - name: "5153"
     protocol: TCP
@@ -16,21 +17,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-api
+  name: my-api
   labels:
-    name: admin-api
+    name: my-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: admin-api
+      service: my-api
   template:
     metadata:
       labels:
-        service: admin-api
+        service: my-api
     spec:
       containers:
-      - name: admin-api
+      - name: my-api
         image: 275244404389.dkr.ecr.us-east-1.amazonaws.com/chienproject3:3
         imagePullPolicy: Always
         ports:
